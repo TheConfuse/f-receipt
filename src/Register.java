@@ -2,28 +2,26 @@ import java.util.Scanner;
 
 
 public class Register {
-	public static void main(String[] args) {
+	
+	boolean continueRegister = true;
+	
+	public Register(String cashierName) {
 		Scanner registerScanner = new Scanner(System.in);
-		System.out.println("Welcome to the register. What is your name? ");
-		String cashierName = registerScanner.next();
 		Receipt newReceipt = new Receipt(cashierName);
-		
 		System.out.println("Hi " + cashierName + ", what do you want to do?");
 		
-		boolean continueRegister = true;
 		String regInput;
 		while(continueRegister == true) {
-			System.out.println("addProduct, printReceipt");
-			System.out.print(">");
+			this.userInputField("addProduct, printReceipt");
 			regInput = registerScanner.next();
 			switch(regInput) {
 			case "addProduct":
-				System.out.println("Input productname: ");
-				System.out.print(">");
+				this.userInputField("Input productname: ");
 				String inputProductName = registerScanner.next();
-				System.out.println("Input price of product: ");
-				System.out.print(">");
+				
+				this.userInputField("Input price of product: ");
 				String inputProductPrice = registerScanner.next();
+				
 				Product newProduct = new Product(inputProductName, Double.parseDouble(inputProductPrice));
 				newReceipt.addProductToReceipt(newProduct);
 				System.out.println("You created a " + inputProductName + " with the price " + inputProductPrice + ".");
@@ -41,6 +39,26 @@ public class Register {
 				break;
 			} // switch
 		} // while
+	} // register
 	
+	/**
+	 * Printing the specified message to the console. 
+	 * 
+	 * @param message the message to print
+	 */
+	public void userInputField(String message) {
+		System.out.println(message);
+		System.out.print(">");
 	}
+	
+	public static void main(String[] args) {
+		Scanner mainScanner = new Scanner(System.in);
+		System.out.println("Welcome to the register. What is your name? ");
+		System.out.print(">");
+		String cashierName = mainScanner.next();
+		new Register(cashierName);
+		
+	}
+	
+	
 }
