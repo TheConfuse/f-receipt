@@ -11,6 +11,8 @@ import java.util.ArrayList;
 
 public class Receipt {
 
+	private static int receiptID;
+	private final int currentReceiptID;
 	private String cashierName;
 	private ArrayList<Product> productList;
 	
@@ -18,6 +20,8 @@ public class Receipt {
 	 * Constructor for the receipt. 
 	 */
 	public Receipt(String cashier) {
+		receiptID += 1;
+		currentReceiptID = receiptID;
 		productList = new ArrayList<Product>();
 		cashierName = cashier;
 	}
@@ -41,11 +45,14 @@ public class Receipt {
 	}
 
 	public String toString() {
-		String returnString = null;
+		String returnString = new String();
+		returnString += "Receipt number " + currentReceiptID + ": \n ";
 		for(Product prod : productList) {
 			returnString += prod.toString();
 			returnString += "\n";
 		} // for
+		returnString += "Total: " + getTotalSum();
+		
 		return returnString;
 	}
 

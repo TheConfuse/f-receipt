@@ -8,26 +8,39 @@ public class Register {
 		String cashierName = registerScanner.next();
 		Receipt newReceipt = new Receipt(cashierName);
 		
-		System.out.println("Hi" + cashierName + ", what do you want to do?");
-		String regInput = registerScanner.next();
+		System.out.println("Hi " + cashierName + ", what do you want to do?");
 		
-		switch(regInput) {
-		case "addProduct":
-			System.out.print("Input productname: ");
-			String inputProductName = registerScanner.next();
-			System.out.print("Input price of product: ");
-			String inputProductPrice = registerScanner.next();
-			Product newProduct = new Product(inputProductName, Integer.parseInt(inputProductPrice));
-			newReceipt.addProductToReceipt(newProduct);
-			System.out.println("You created a " + inputProductName + " with the price " + inputProductPrice + ".");
-			return;
-		case "printReceipt":
-			newReceipt.toString();
-			return;
-		default:
-			System.out.println("Invalid command, try again. ");
-			return;
-		}
+		boolean continueRegister = true;
+		String regInput;
+		while(continueRegister == true) {
+			System.out.println("addProduct, printReceipt");
+			System.out.print(">");
+			regInput = registerScanner.next();
+			switch(regInput) {
+			case "addProduct":
+				System.out.println("Input productname: ");
+				System.out.print(">");
+				String inputProductName = registerScanner.next();
+				System.out.println("Input price of product: ");
+				System.out.print(">");
+				String inputProductPrice = registerScanner.next();
+				Product newProduct = new Product(inputProductName, Double.parseDouble(inputProductPrice));
+				newReceipt.addProductToReceipt(newProduct);
+				System.out.println("You created a " + inputProductName + " with the price " + inputProductPrice + ".");
+				break;
+			case "printReceipt":
+				System.out.println("Receipt number x: ");
+				System.out.println(newReceipt.toString());
+				break;
+			case "exit":
+				System.out.println("Thank you for using awesomeregister 0.001!");
+				continueRegister = false;
+				break;
+			default:
+				System.out.println("Invalid command, try again. ");
+				break;
+			} // switch
+		} // while
 	
 	}
 }
